@@ -25,9 +25,7 @@ export default defineComponent({
         <li
           v-for="card in weatherData"
           class="weather-card"
-          :class="checkIfNight(card.current.dt, card.current.sunrise, card.current.sunset,)
-          ? 'weather-card--night'
-          : 'weather-card'">
+          :class="{ 'weather-card--night' : checkIfNight(card.current.dt, card.current.sunrise, card.current.sunset) }">
           <div v-if="card.alert" class="weather-alert">
             <span class="weather-alert__icon">⚠️</span>
             <span class="weather-alert__description">{{ card.alert.sender_name + ". " + card.alert.description }}</span>

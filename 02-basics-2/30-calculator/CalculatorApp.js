@@ -1,26 +1,55 @@
-import { defineComponent } from 'vue'
+import {defineComponent, computed, ref} from 'vue'
 
 export default defineComponent({
   name: 'CalculatorApp',
 
-  setup() {},
+  setup() {
+    const operator = ref('');
+    const firstOperand = ref('');
+    const secondOperand = ref('');
+
+    const operations = {
+      sum: (a, b) => a + b,
+      subtract: (a, b) => a - b,
+      multiply: (a, b) => a * b,
+      divide: (a, b) => b !== 0 ? a / b : 'Ошибка: деление на 0',
+    }
+
+    const result =  computed(() => {
+      const calculateResult = operations[operator.value]
+
+      if (!calculateResult || !firstOperand.value || !secondOperand.value) {
+        return 'Введите все данные'
+      }
+
+      return calculateResult(firstOperand.value, secondOperand.value)
+
+    })
+
+    return {
+      result,
+      operator,
+      firstOperand,
+      secondOperand
+    }
+  },
 
   template: `
     <div class="calculator">
-      <input type="number" aria-label="First operand" />
+      <input v-model="firstOperand" type="number" aria-label="First operand" />
 
       <div class="calculator__operators">
-        <label><input type="radio" name="operator" value="sum"/>➕</label>
-        <label><input type="radio" name="operator" value="subtract"/>➖</label>
-        <label><input type="radio" name="operator" value="multiply"/>✖</label>
-        <label><input type="radio" name="operator" value="divide"/>➗</label>
+        <label><input v-model="operator" type="radio" name="operator" value="sum"/>➕</label>
+        <label><input v-model="operator" type="radio" name="operator" value="subtract"/>➖</label>
+        <label><input v-model="operator" type="radio" name="operator" value="multiply"/>✖</label>
+        <label><input v-model="operator" type="radio" name="operator" value="divide"/>➗</label>
       </div>
 
-      <input type="number" aria-label="Second operand" />
+      <input v-model="secondOperand" type="number" aria-label="Second operand" />
 
       <div>=</div>
 
-      <output>0</output>
+      <output>{{ result }}</output>
     </div>
   `,
 })

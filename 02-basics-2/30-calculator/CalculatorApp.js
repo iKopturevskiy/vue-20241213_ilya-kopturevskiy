@@ -4,9 +4,9 @@ export default defineComponent({
   name: 'CalculatorApp',
 
   setup() {
-    const operator = ref('');
-    const firstOperand = ref('');
-    const secondOperand = ref('');
+    const operator = ref(null);
+    const firstOperand = ref(null);
+    const secondOperand = ref(null);
 
     const operations = {
       sum: (a, b) => a + b,

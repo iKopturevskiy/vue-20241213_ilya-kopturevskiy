@@ -1,14 +1,9 @@
-import { defineComponent, ref, watch } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
 
 export default defineComponent({
   name: 'MapApp',
 
   setup() {
-    // Реактивные переменные для хранения координат метки
-    const pin = ref({
-      left: '0px',
-      top: '0px'
-    })
     const x = ref(0)
     const y = ref(0)
 
@@ -21,11 +16,11 @@ export default defineComponent({
       y.value = event.offsetY
     }
 
-    // Следим за X и Y для установки нового положения
-    watch([pin, x, y], () => {
-      // Находим метку и изменяем её положение
-      pin.value.left = `${x.value}px`
-      pin.value.top = `${y.value}px`
+    const pin = computed(() => {
+      return {
+        left: `${x.value}px`,
+        top: `${y.value}px`
+      }
     })
 
     return {

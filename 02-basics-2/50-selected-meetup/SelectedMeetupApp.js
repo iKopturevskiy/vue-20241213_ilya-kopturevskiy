@@ -24,7 +24,7 @@ export default defineComponent({
         <button :disabled="meetupId === 1" @click="meetupId--" class="button button--secondary" type="button">Предыдущий</button>
 
         <div class="radio-group" role="radiogroup">
-          <div v-for="id in [1, 2, 3, 4, 5]" :key="id" class="radio-group__button">
+          <div v-for="id in 5" :key="id" class="radio-group__button">
             <input
               :id="'meetup-id-' + id"
               class="radio-group__input"

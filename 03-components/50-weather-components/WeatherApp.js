@@ -10,7 +10,6 @@ export default defineComponent({
   },
 
   setup () {
-
     return {
       weatherData: getWeatherData(),
       icons: WeatherConditionIcons,

@@ -3,6 +3,7 @@ import './WeatherApp.css'
 import WeatherCardIfAlert from "./WeatherCardIfAlert.js";
 import WeatherMainData from "./WeatherMainData.js";
 import WeatherSecondaryData from "./WeatherSecondaryData.js";
+import GeographicInfo from "./GeographicInfo.js";
 
 export default defineComponent({
   name: 'WeatherAppList',
@@ -11,6 +12,7 @@ export default defineComponent({
     WeatherCardIfAlert,
     WeatherMainData,
     WeatherSecondaryData,
+    GeographicInfo,
   },
 
   props: {
@@ -40,8 +42,11 @@ export default defineComponent({
       v-for="card in weatherData"
       class="weather-card"
       :class="{ 'weather-card--night' : checkIfNight(card) }">
+
       <WeatherCardIfAlert :card="card"/>
+      <GeographicInfo :card="card"/>
       <WeatherMainData :card="card" :icons="icons"/>
       <WeatherSecondaryData :card="card"/>
+
     </li>`
 })

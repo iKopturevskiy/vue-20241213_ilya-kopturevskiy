@@ -11,9 +11,9 @@ export default defineComponent( {
   },
 
   template: `
-  <div v-if="card.alert" class="weather-alert">
-        <span class="weather-alert__icon">⚠️</span>
-        <span class="weather-alert__description">{{ card.alert.sender_name + ". " + card.alert.description }}</span>
-      </div>
+    <div v-if="card.alert" class="weather-alert">
+      <span class="weather-alert__icon">⚠️</span>
+      <span class="weather-alert__description">{{ card.alert.sender_name + ". " + card.alert.description }}</span>
+    </div>
 `
 })

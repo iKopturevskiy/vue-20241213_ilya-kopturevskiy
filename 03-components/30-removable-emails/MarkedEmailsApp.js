@@ -1,7 +1,6 @@
 import { computed, defineComponent, ref } from 'vue'
 import { UiFormGroup, UiInput } from '@shgk/vue-course-ui'
 import EmailList from './EmailList.js'
-import {emails} from "../../02-basics-2/40-marked-emails/MarkedEmailsApp.js";
 
 // Значения взяты из https://jsonplaceholder.typicode.com/comments
 export function getEmails() {
@@ -65,18 +64,12 @@ export default defineComponent({
     }
   },
 
-  methods: {
-    emails() {
-      return emails
-    }
-  },
-
   template: `
     <div>
       <UiFormGroup>
         <UiInput v-model.trim="query" type="search" placeholder="Поиск" aria-label="Поиск" small/>
       </UiFormGroup>
-      <EmailList :emails="markedEmails" @update:emails="removeEmailByIndex($event)"/>
+      <EmailList :emails="markedEmails" @remove="removeEmailByIndex"/>
     </div>
   `,
 })

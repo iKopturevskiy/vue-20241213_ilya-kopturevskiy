@@ -15,7 +15,7 @@ export default defineComponent({
     },
   },
 
-  emits: ['update:emails'],
+  emits: ['remove'],
 
   template: `
     <ul class="emails-list unstyled-list" aria-label="Emails">
@@ -24,7 +24,7 @@ export default defineComponent({
         :key="email"
         :email="email"
         :marked="isMarked"
-        @update:email="$emit('update:emails', index)"
+        @remove="$emit('remove', index)"
       />
     </ul>
   `,

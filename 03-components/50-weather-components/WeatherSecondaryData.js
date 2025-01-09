@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 
 export default defineComponent({
   name: 'WeatherSecondaryData',
@@ -10,11 +10,18 @@ export default defineComponent({
     }
   },
 
+  setup (props) {
+    const pressure = computed(() => Number(props.card.current.pressure * 0.75).toFixed(0))
+    return {
+      pressure,
+    }
+  },
+
   template: `
     <div class="weather-details">
       <div class="weather-details__item">
         <div class="weather-details__item-label">Давление, мм рт. ст.</div>
-        <div class="weather-details__item-value">{{ Number(card.current.pressure * 0.75).toFixed(0) }}</div>
+        <div class="weather-details__item-value">{{ pressure }}</div>
       </div>
       <div class="weather-details__item">
         <div class="weather-details__item-label">Влажность, %</div>

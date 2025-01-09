@@ -1,18 +1,22 @@
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { getWeatherData, WeatherConditionIcons } from './weather.service.ts'
-import WeatherAppList from './WeatherAppList.js'
+import WeatherAppCard from './WeatherAppCard.js'
+import WeatherMainData from "./WeatherMainData.js";
 
 export default defineComponent({
   name: 'WeatherApp',
 
   components: {
-    WeatherAppList,
+    WeatherMainData,
+    WeatherAppCard,
   },
 
   setup () {
+    const icons = computed(() => WeatherConditionIcons);
+    const weatherData = computed(() => getWeatherData())
     return {
-      weatherData: getWeatherData(),
-      icons: WeatherConditionIcons,
+      weatherData,
+      icons,
     }
   },
 
@@ -21,9 +25,7 @@ export default defineComponent({
       <h1 class="title">Погода в Средиземье</h1>
 
       <ul class="weather-list unstyled-list">
-        <WeatherAppList
-          :weatherData="weatherData"
-          :icons="icons"/>
+        <WeatherAppCard v-for="card in weatherData" :card :icons/>
       </ul>
     </div>
   `,

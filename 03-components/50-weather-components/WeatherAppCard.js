@@ -6,7 +6,7 @@ import WeatherSecondaryData from "./WeatherSecondaryData.js";
 import GeographicInfo from "./GeographicInfo.js";
 
 export default defineComponent({
-  name: 'WeatherAppList',
+  name: 'WeatherAppCard',
 
   components: {
     WeatherCardIfAlert,
@@ -16,8 +16,8 @@ export default defineComponent({
   },
 
   props: {
-    weatherData: {
-      type: Array,
+    card: {
+      type: Object,
       required: true,
     },
 
@@ -39,14 +39,15 @@ export default defineComponent({
 
   template: `
     <li
-      v-for="card in weatherData"
       class="weather-card"
       :class="{ 'weather-card--night' : checkIfNight(card) }">
 
-      <WeatherCardIfAlert :card="card"/>
-      <GeographicInfo :card="card"/>
-      <WeatherMainData :card="card" :icons="icons"/>
-      <WeatherSecondaryData :card="card"/>
+      <WeatherCardIfAlert v-if="card.alert">
+        {{ card.alert.sender_name + ". " + card.alert.description }}
+      </WeatherCardIfAlert>
+      <GeographicInfo :card/>
+      <WeatherMainData :card :icons/>
+      <WeatherSecondaryData :card/>
 
     </li>`
 })

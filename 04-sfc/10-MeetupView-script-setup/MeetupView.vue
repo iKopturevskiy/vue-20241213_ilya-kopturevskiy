@@ -1,40 +1,48 @@
-<script>
-import { defineComponent } from 'vue'
+<script setup>
 import { UiAlert, UiContainer } from '@shgk/vue-course-ui'
 import MeetupAgenda from './MeetupAgenda.vue'
 import MeetupDescription from './MeetupDescription.vue'
 import MeetupCover from './MeetupCover.vue'
 import MeetupInfo from './MeetupInfo.vue'
 
-export default defineComponent({
-  name: 'MeetupView',
-
-  components: {
-    UiAlert,
-    UiContainer,
-  },
+const props = defineProps({
+  /**
+   * @type {{ title: string, image: string, description: string, agenda: Array, organizer: string, place: string, date: string }}
+   */
+  meetup: {
+    type: Object,
+    required: true,
+  }
 })
 </script>
 
 <template>
   <div>
-    <!-- Обложка митапа -->
+
+    <MeetupCover
+      :title="props.meetup.title"
+      :image="props.meetup.image" />
 
     <UiContainer>
-      <div class="meetup">
+      <div class="meetup">date
         <div class="meetup__content">
           <h2>Описание</h2>
 
-          <!-- Описание митапа -->
+          <MeetupDescription :description="props.meetup.description" />
 
           <h2>Программа</h2>
 
-          <!-- Программа митапа -->
-          <!-- Или при пустой программе - сообщение "Программа пока пуста..." в UiAlert -->
-          <UiAlert></UiAlert>
+          <MeetupAgenda v-if="props.meetup.agenda?.length" :agenda="props.meetup.agenda"/>
+          <UiAlert v-else>Программа пока пуста...</UiAlert>
+
         </div>
         <div class="meetup__aside">
-          <!-- Краткая информация о митапе -->
+
+          <MeetupInfo
+            :organizer="props.meetup.organizer"
+            :place="props.meetup.place"
+            :date="props.meetup.date"
+          />
 
           <div class="meetup__aside-buttons"></div>
         </div>

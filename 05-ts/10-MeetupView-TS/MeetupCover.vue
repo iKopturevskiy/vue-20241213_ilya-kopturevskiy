@@ -1,23 +1,18 @@
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 
-const props = defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
+const props = defineProps<{
+  title: string,
+  image?: string
+}>()
 
-  image: {
-    type: String,
-  },
-})
 
 const bgStyle = computed(() => (props.image ? { '--bg-url': `url('${props.image}')` } : undefined))
 </script>
 
 <template>
   <div class="meetup-cover" :style="bgStyle">
-    <h1 class="meetup-cover__title">{{ title }}</h1>
+    <h1 class="meetup-cover__title">{{ props.title }}</h1>
   </div>
 </template>
 

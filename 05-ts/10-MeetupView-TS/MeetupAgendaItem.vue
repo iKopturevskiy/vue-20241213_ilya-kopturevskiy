@@ -1,15 +1,11 @@
-<script setup>
-// import type { MeetupAgendaItemDTO } from '@shgk/vue-course-ui'
+<script setup lang="ts">
+import type {MeetupAgendaItemDTO} from '@shgk/vue-course-ui'
 import { computed } from 'vue'
 import { UiIcon } from '@shgk/vue-course-ui'
 
-const props = defineProps({
-  agendaItem: {
-    // Настоящий тип - MeetupAgendaItemDTO
-    type: Object,
-    required: true,
-  },
-})
+const props = defineProps<{
+  agendaItem: MeetupAgendaItemDTO
+}>()
 
 const agendaItemDefaultTitles = {
   registration: 'Регистрация',
@@ -42,15 +38,15 @@ const title = computed(() => agendaItemDefaultTitles[props.agendaItem.type])
     <div class="agenda-item__col">
       <UiIcon :icon="icon" />
     </div>
-    <div class="agenda-item__col">{{ agendaItem.startsAt }} - {{ agendaItem.endsAt }}</div>
+    <div class="agenda-item__col">{{ props.agendaItem.startsAt }} - {{ props.agendaItem.endsAt }}</div>
     <div class="agenda-item__col">
       <div class="agenda-item__title">{{ title }}</div>
-      <div v-if="agendaItem.speaker" class="agenda-item__talk">
-        <span>{{ agendaItem.speaker }}</span>
+      <div v-if="props.agendaItem.speaker" class="agenda-item__talk">
+        <span>{{ props.agendaItem.speaker }}</span>
         <span class="agenda-item__dot"></span>
-        <span class="agenda-item__lang">{{ agendaItem.language }}</span>
+        <span class="agenda-item__lang">{{ props.agendaItem.language }}</span>
       </div>
-      <div v-if="agendaItem.description">{{ agendaItem.description }}</div>
+      <div v-if="props.agendaItem.description">{{ props.agendaItem.description }}</div>
     </div>
   </div>
 </template>

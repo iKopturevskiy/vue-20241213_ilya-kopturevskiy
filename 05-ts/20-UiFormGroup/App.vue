@@ -10,7 +10,11 @@ const text = ref('')
   <UiContainer>
     <UiStory title="Простое использование">
       <UiFlex gap="larger" column>
-        <UiFormGroup for="password0" label="Пароль" hint="Это поле обязательно для заполнения" :invalid="!text">
+        <UiFormGroup
+          for="password0"
+          label="Пароль"
+          hint="Это поле обязательно для заполнения"
+          :invalid="!text">
           <UiInput id="password0" v-model="text" />
         </UiFormGroup>
 
